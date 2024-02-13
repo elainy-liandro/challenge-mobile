@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Mobile Challenge Suite">
+    <test name="Swag Labs e-commerce">
+        <classes>
+            <class name="org.liandro.elainy.tests.LoginTests"/>
+        </classes>
+    </test>
+</suite>
