@@ -2,12 +2,17 @@ package org.liandro.elainy.tests;
 
 import io.appium.java_client.AppiumDriver;
 import org.liandro.elainy.pages.PageObjectFactory;
-import org.liandro.elainy.pages.objects.LoginPageObject;
+import org.liandro.elainy.pages.objects.*;
 import org.liandro.elainy.utils.Utils;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.BeforeTest;
+import org.testng.annotations.*;
+
+import java.io.File;
+import java.io.IOException;
+import java.sql.Timestamp;
 
 public class BaseTests {
 
@@ -16,6 +21,10 @@ public class BaseTests {
 
     protected PageObjectFactory pageObjectFactory;
     protected LoginPageObject loginPageObject;
+    protected ProductsPageObejct productsPageObejct;
+    protected ProductDetailsPageObject productDetailsPageObject;
+    protected ShoppingCartPageObject shoppingCartPageObject;
+    protected CheckoutPageObject checkoutPageObject;
 
     public BaseTests() {
         Utils.startDriver();
@@ -23,6 +32,10 @@ public class BaseTests {
         webDriverWait = Utils.getWaitDriver();
         this.pageObjectFactory = new PageObjectFactory(appiumDriver);
         this.loginPageObject = pageObjectFactory.getLoginPageObject();
+        this.productsPageObejct = pageObjectFactory.getProductsPageObejct();
+        this.productDetailsPageObject = pageObjectFactory.getProductDetailsPageObject();
+        this.shoppingCartPageObject = pageObjectFactory.getShoppingCartPageObject();
+        this.checkoutPageObject = pageObjectFactory.getCheckoutPageObject();
     }
 
     @BeforeMethod
@@ -30,7 +43,18 @@ public class BaseTests {
         appiumDriver.get("https://www.saucedemo.com/");
     }
 
-    @AfterSuite
+    @AfterMethod
+    public void screenshot() {
+        Timestamp timeNow = new Timestamp(System.currentTimeMillis());
+        File evidence = ((TakesScreenshot) appiumDriver).getScreenshotAs(OutputType.FILE);
+        try {
+            FileUtils.moveFile(evidence, new File("target/screenshots/screenshot" + timeNow + ".jpg"));
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    @AfterClass
     public static void tearDown() {
         Utils.stopApp();
     }

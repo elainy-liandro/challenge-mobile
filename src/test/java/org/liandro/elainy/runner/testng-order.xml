@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Mobile Challenge Suite" verbose="1">
+    <test name="Swag Labs e-commerce - Order">
+        <classes>
+            <class name="org.liandro.elainy.tests.OrderTests">
+                <methods>
+                    <parameter name="usuario" value="standard_user"/>
+                    <parameter name="senha" value="secret_sauce"/>
+                    <include name="realizarPedido"/>
+                    <include name="realizarPedidoUtilizandoFiltro"/>
+                    <include name="realizarPedidoFail_NomeVazio"/>
+                    <include name="realizarPedidoFail_SobrenomeVazio"/>
+                    <include name="realizarPedidoFail_PostalCodeVazio"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

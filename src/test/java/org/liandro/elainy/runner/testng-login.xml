@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Mobile Challenge Suite" verbose="1">
+    <test name="Swag Labs e-commerce - Login">
+        <classes>
+            <class name="org.liandro.elainy.tests.LoginTests">
+                <methods>
+                    <include name="Login">
+                        <parameter name="usuario" value="standard_user"/>
+                        <parameter name="senha" value="secret_sauce"/>
+                    </include>
+                    <include name="LoginFail_UsuarioVazio"/>
+                    <include name="LoginFail_SenhaVazia">
+                        <parameter name="usuario" value="standard_user"/>
+                    </include>
+                    <include name="LoginFail_UsuarioBloqueado">
+                        <parameter name="usuario" value="locked_out_user"/>
+                        <parameter name="senha" value="secret_sauce"/>
+                    </include>
+                    <include name="LoginFail_UsuarioInvalido">
+                        <parameter name="usuario" value="standard_user123"/>
+                        <parameter name="senha" value="secret_sauce"/>
+                    </include>
+                    <include name="LoginFail_SenhaInvalida">
+                        <parameter name="usuario" value="standard_user"/>
+                        <parameter name="senha" value="secret_sauce123"/>
+                    </include>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

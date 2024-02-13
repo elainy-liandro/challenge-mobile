@@ -1,6 +1,5 @@
 package org.liandro.elainy.utils;
 
-import io.appium.java_client.android.AndroidDriver;
 import io.appium.java_client.ios.IOSDriver;
 import io.appium.java_client.ios.options.XCUITestOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
@@ -16,7 +15,6 @@ public class Utils {
     protected final static int SHORT_TIMEOUT = 15;
     protected final static int LONG_TIMEOUT = 30;
 
-
     public static void startDriver() {
 
         URL driverUrl;
@@ -28,8 +26,8 @@ public class Utils {
 
         XCUITestOptions optionsIos = new XCUITestOptions()
                 .setUdid("FD4E7EDE-8BA6-47F0-96C0-6594A634A376")
-                .setPlatformName("iOS")
                 .setDeviceName("Simulator iPhone 15")
+                .setPlatformName("iOS")
                 .withBrowserName("Safari");
         iosDriver = new IOSDriver(driverUrl, optionsIos);
         iosDriver.manage().timeouts().implicitlyWait(Duration.ofSeconds(SHORT_TIMEOUT));
