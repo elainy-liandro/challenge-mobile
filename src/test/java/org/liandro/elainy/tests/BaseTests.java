@@ -28,7 +28,7 @@ public class BaseTests {
 
     public BaseTests() {
         Utils.startDriver();
-        appiumDriver = Utils.getIosDriver();
+        appiumDriver = Utils.getDriver();
         webDriverWait = Utils.getWaitDriver();
         this.pageObjectFactory = new PageObjectFactory(appiumDriver);
         this.loginPageObject = pageObjectFactory.getLoginPageObject();
@@ -46,9 +46,12 @@ public class BaseTests {
     @AfterMethod
     public void screenshot() {
         Timestamp timeNow = new Timestamp(System.currentTimeMillis());
-        File evidence = ((TakesScreenshot) appiumDriver).getScreenshotAs(OutputType.FILE);
+        String so = appiumDriver.getCapabilities().getPlatformName().toString();
+        String timeNowFormatado = timeNow.toString();
+        timeNowFormatado = timeNowFormatado.replace(":", ".").replace(" ", "_");
         try {
-            FileUtils.moveFile(evidence, new File("target/screenshots/screenshot" + timeNow + ".jpg"));
+            File evidence = ((TakesScreenshot) appiumDriver).getScreenshotAs(OutputType.FILE);
+            FileUtils.moveFile(evidence, new File("target/screenshots/" + so + "_screenshot_" + timeNowFormatado + ".jpg"));
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
